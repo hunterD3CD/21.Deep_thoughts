@@ -4,24 +4,20 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
-    "build": "cd client && npm run build",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd server && npm start",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hunterD3CD/21.Deep_thoughts.git"
+    "seed": "cd server && npm run seed",
+    "heroku-postbuild": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hunterD3CD/21.Deep_thoughts/issues"
+  "dependencies": {
+    "if-env": "^1.0.4"
   },
-  "homepage": "https://github.com/hunterD3CD/21.Deep_thoughts#readme",
   "devDependencies": {
-    "concurrently": "^6.2.1"
+    "concurrently": "^5.1.0"
   }
 }
